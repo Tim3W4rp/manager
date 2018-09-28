@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { text } from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
 import { employeeUpdate, employeeSave, employeeDelete } from '../actions';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
     state = { showModal: false };
@@ -25,6 +25,10 @@ class EmployeeEdit extends Component {
         text(phone, `Your upcoming shift is on ${shift}`);
     }
 
+    showModal() {
+        this.setState({ showModal: !this.state.showModal });
+    }
+
     render() {
         return (
             <Card>
@@ -41,6 +45,18 @@ class EmployeeEdit extends Component {
                         Text schedule
                     </Button>
                 </CardSection>
+
+                <CardSection>
+                    <Button onPress={this.showModal.bind(this)}>
+                        Fire Employee
+                    </Button>
+                </CardSection>
+
+                <Confirm
+                    visible={this.state.showModal}
+                >
+                    Are you sure you want to fire this employee?
+                </Confirm>
             </Card>
         );
     }
