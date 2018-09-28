@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { Picker, Text } from 'react-native';
+import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { employeeUpdate } from '../actions';
-import { Card, CardSection, Input } from './common';
+import { CardSection, Input } from './common';
 
-class EmployeeCreate extends Component {
+class EmployeeForm extends Component {
     render() {
         return (
-            <Card>
+            <View>
                 <CardSection>
                     <Input
                         label="Name"
                         placeholder="Jane"
                         value={this.props.name}
-                        onChangeText={value => this.props.employeeUpdate({ prop: 'name', value })}
+                        onChangeText={
+                            value => this.props.employeeUpdate(
+                                { prop: 'name', value }
+                            )
+                        }
                     />
                 </CardSection>
 
@@ -22,18 +26,24 @@ class EmployeeCreate extends Component {
                         label="Phone"
                         placeholder="+420..."
                         value={this.props.phone}
-                        onChangeText={value => this.props.employeeUpdate({ prop: 'phone', value })}
+                        onChangeText={
+                            value => this.props.employeeUpdate(
+                                { prop: 'phone', value }
+                            )
+                        }
                     />
                 </CardSection>
 
                 <CardSection>
-                    <Text style={styles.pickerTextStyle}>
-                        Shift
-                    </Text>
+                    <Text style={styles.pickerTextStyle}>Shift</Text>
                     <Picker
                         style={{ flex: 1 }}
                         selectedValue={this.props.shift}
-                        onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
+                        onValueChange={
+                            value => this.props.employeeUpdate(
+                                { prop: 'shift', value }
+                            )
+                        }
                     >
                         <Picker.Item label="Monday" value="Monday" />
                         <Picker.Item label="Tuesday" value="Tuesday" />
@@ -44,7 +54,7 @@ class EmployeeCreate extends Component {
                         <Picker.Item label="Sunday" value="Sunday" />
                     </Picker>
                 </CardSection>
-            </Card>
+            </View>
         );
     }
 }
@@ -62,4 +72,4 @@ const mapStateToProps = (state) => {
     return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeUpdate })(EmployeeForm);
