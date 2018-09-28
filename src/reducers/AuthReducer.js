@@ -7,16 +7,14 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    email: '',
-    password: '',
+    email: 'test@test.com',
+    password: 'password',
     user: null,
     error: '',
     loading: false
 };
 
 export default (state = initialState, action) => {
-    console.log(action);
-
     switch (action.type) {
         case EMAIL_CHANGED:
             return { ...state, email: action.payload };
