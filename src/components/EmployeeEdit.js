@@ -25,6 +25,15 @@ class EmployeeEdit extends Component {
         text(phone, `Your upcoming shift is on ${shift}`);
     }
 
+    onAccept() {
+        const { uid } = this.props.employee;
+        this.props.employeeDelete(uid);
+    }
+
+    onDecline() {
+        this.setState({ showModal: false });
+    }
+
     showModal() {
         this.setState({ showModal: !this.state.showModal });
     }
@@ -54,6 +63,8 @@ class EmployeeEdit extends Component {
 
                 <Confirm
                     visible={this.state.showModal}
+                    onAccept={this.onAccept.bind(this)}
+                    onDecline={this.onDecline.bind(this)}
                 >
                     Are you sure you want to fire this employee?
                 </Confirm>
